@@ -54,13 +54,17 @@
             </el-table-column>
             <el-table-column label="操作" width="160">
                 <template slot-scope="scope">
-                    <el-button type="primary" size="mini" @click="handleEdit(scope.$index, scope.row, 'U')">查看</el-button>
+                    <el-button type="primary" size="mini" @click="handleEdit(scope.row)">查看</el-button>
                 </template>
             </el-table-column>
         </el-table>
         <!--工具条-->
-          <el-pagination layout="prev, pager, next, total" @current-change="handleCurrentChange" :page-size="10" :total="pagetotal" style="float:right;">
-          </el-pagination>
+        <el-pagination layout="prev, pager, next, total" @current-change="handleCurrentChange" :page-size="10" :total="pagetotal" style="float:right;">
+        </el-pagination>
+        <!--凭证-->  
+        <el-dialog title="" :visible.sync="voucherVisible" width="660px" :close-on-click-modal="false" >
+          <voucherdetail :curtainId="curtainId" voucherFormStatus="S" :vouVisible="voucherVisible" :voucherId="voucherId" ></voucherdetail>
+        </el-dialog>
   </div>
     
 
@@ -69,12 +73,14 @@
 
 <script>
 import subjecttree from '../subject/SubjectTree'
+import voucherdetail from './VoucherDetail'
 import {getDetailList, exportDetailExcel} from '../../api/index'
 import util from '../../common/js/util'
 export default {
   data () {
     return {
       curtainId: '',
+      voucherId: '', // 需要查看的凭证
       sysUserName: '',
       listLoading: false,
       exportLoading: false,
@@ -87,12 +93,14 @@ export default {
       },
       pagetotal: 0,
       seleSubVisible: false,
+      voucherVisible: false,
       seleSub: {},
       index: 0 // 当前光标所在的index
     }
   },
   components: {
-    subjecttree
+    subjecttree,
+    voucherdetail
   },
   methods: {
     // 格式化数字，显示
@@ -141,6 +149,10 @@ export default {
           util.downloadExcel(res)
         }
       })
+    },
+    handleEdit (row) {
+      this.voucherId = row.voucher.id
+      this.voucherVisible = true
     }
   },
   mounted () {

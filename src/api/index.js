@@ -1,7 +1,7 @@
 import axios from 'axios'
 // let base = 'http://47.104.60.254:8081'
-// let base = 'http://192.168.1.110:8081'
-let base = 'http://localhost:8081'
+let base = 'http://192.168.1.104:8081'
+// let base = 'http://localhost:8081'
 // ----登录
 export const getRoleByLoginName = params => { return axios.get(`${base}/auth/getRoleByLoginName`, { params: params }) }
 // 登录
@@ -50,10 +50,12 @@ export const copySubject = params => { return axios.post(`${base}/subject/copySu
 export const getSubjectsTree = params => { return axios.get(`${base}/subject/getSubjectsTree`, { params: params }) }
 // ----凭证
 export const getVouchers = params => { return axios.get(`${base}/voucher/listPage`, { params: params }) }
-
+// 保存凭证
 export const saveVoucher = params => { return axios.post(`${base}/voucher/save`, params) }
-
+// 获得凭证明细
 export const getVoucherDetails = params => { return axios.get(`${base}/voucher/getVoucherDetails`, { params: params }) }
+// 获得凭证和凭证明细信息
+export const getVoucherInfo = params => { return axios.get(`${base}/voucher/getVoucherInfo`, { params: params }) }
 // 获得凭证编号集合
 export const getStatusOptions = params => { return axios.get(`${base}/voucher/getStatusOptions`) }
 // 根据ID集合审核凭证
@@ -64,6 +66,10 @@ export const auditAllVouchers = params => { return axios.get(`${base}/voucher/au
 export const getVoucherForm = params => { return axios.get(`${base}/voucher/getVoucherForm`, { params: params }) }
 // 取消审核
 export const cancelAudit = params => { return axios.get(`${base}/voucher/cancelAudit`, { params: params }) }
+// 作废一张凭证
+export const cancelVoucher = params => { return axios.get(`${base}/voucher/cancelVoucher`, { params: params }) }
+// 凭证打印
+export const getVoucherPrintInfo = params => { return axios.get(`${base}/voucher/getVoucherPrintInfo`, { params: params }) }
 // ----明细账
 export const getDetailList = params => { return axios.get(`${base}/voucher/getDetailList`, { params: params }) }
 // 导出明细账

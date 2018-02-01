@@ -15,6 +15,7 @@ import Reportbelement from '@/components/report/ReportBElement'
 import Reportpelement from '@/components/report/ReportPElement'
 import Reportb from '@/components/report/ReportB'
 import Reportp from '@/components/report/ReportP'
+import PrintVoucher from '@/components/voucher/PrintVoucher'
 
 Vue.use(Router)
 /* eslint-disable */
@@ -30,6 +31,12 @@ export default new Router({
     {
         path: '/404',
         component: NotFound,
+        name: '',
+        hidden: true
+    },
+    {
+        path: '/printvoucher/:voucherId',
+        component: PrintVoucher,
         name: '',
         hidden: true
     },
